@@ -11,9 +11,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.get('/example', (req, res) => {
-    res.send({firname: "Hasan", age: 22});
-  });
+ //making connection with MySQL server
+
+ var db = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '',
+  database : 'postbook2',
+});
+ 
+db.connect((err) => {
+  if (err) {
+    console.log("Something went wrong while connecting to database: ", err);
+    throw err;
+  }
+  else{
+    console.log("MySQL server connected...");
+  }
+});
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
