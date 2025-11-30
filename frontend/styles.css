@@ -11,7 +11,7 @@
 
 .login-form h3{
     text-align: center;
-    color: olivedrab;
+    color: rgb(11, 88, 11);
 }
 form{
     display: flex;
@@ -35,4 +35,20 @@ input[type="text"], input[type="password"]{
     border-radius: 10px;
     font-size: 18px;
     margin: 0 auto;
+}
+
+.error{
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    color: red;
+    border: 2px solid red;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffe5e5;
+}
+
+
+.hidden{
+    display: none;
 }

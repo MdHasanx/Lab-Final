@@ -1,4 +1,4 @@
-const handleLogin = () => {
+const handleLogin = async() => {
     const userIdInput = document.getElementById("user-id");
     const passwordInput = document.getElementById("password");
 
@@ -10,7 +10,24 @@ const handleLogin = () => {
         password: password,
     };
 
-    fetchUserInfo(user);
+  const userInfo = await fetchUserInfo(user);
+  console.log(userInfo);
+    const errorElement = document.getElementById ("user-login-error");
+
+    //user data did not match with database
+    if(userInfo.length === 0){
+        errorElement.classList.remove("hidden");
+    }
+    else {
+        errorElement.classList.add("hidden");
+
+        //save user information before jumping to the next page
+        localStorage.setItem("loggedInUser", JSON.stringify(userInfo[0]));
+
+        //then make a jump to a new page
+        window.location.href = "/post.html";
+    }
+
 };
 
 const fetchUserInfo = async(user) => {
@@ -31,6 +48,6 @@ const fetchUserInfo = async(user) => {
  }
 
  finally{
-    console.log("user info from server: ", data);
+   return data;
  }
 };
