@@ -189,7 +189,7 @@ const fetchAllCommentsofAPost = async(postId) => {
     }
 };
 
-const handleAddNewPost = () => {
+const handleAddNewPost = async () => {
     // getting user Id from localstorage
     let user = localStorage.getItem("loggedInUser");
     if(user){
@@ -224,7 +224,22 @@ const handleAddNewPost = () => {
         postImageUrl : postImageUrl,
     };
 
-    console.log("sending data to server: ", postObject);
+    try{
+        const res = await fetch ('http://localhost:5000/addNewPost', {
+        method: 'POST',
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify(postObject),
+        });
+        const data = await res.json();
+    }
+    catch(err){
+        console.log("Error while sending data to the server: ", err);
+    }
+    finally{
+        location.reload();
+    }
 };
 
 //this function automatically runs
