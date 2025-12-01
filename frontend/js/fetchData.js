@@ -189,6 +189,43 @@ const fetchAllCommentsofAPost = async(postId) => {
     }
 };
 
+const handleAddNewPost = () => {
+    // getting user Id from localstorage
+    let user = localStorage.getItem("loggedInUser");
+    if(user){
+        user = JSON.parse(user);
+    }
+    const postedUserId = user.userid;
+
+     // current time of the post
+
+    let now = new Date();
+    
+    now.setMinutes(now.getMinutes() - now.getTimezoneOffset()); 
+
+    let timeofPost = now.toISOString();
+
+    // post text
+
+    const postTextElement = document.getElementById('newPost-text');
+    const postText = postTextElement.value;
+
+    // post image
+
+    const postImageElement = document.getElementById('newPost-image');
+    const postImageUrl = postImageElement.value;
+
+    // creating a post object
+
+    const postObject = {
+        postedUserId : postedUserId,
+        postedTime : timeofPost,
+        postText : postText,
+        postImageUrl : postImageUrl,
+    };
+
+    console.log("sending data to server: ", postObject);
+};
 
 //this function automatically runs
 fetchALlPosts();

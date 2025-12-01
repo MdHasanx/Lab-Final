@@ -7,12 +7,38 @@
     <link rel="stylesheet" href="/postStyle.css">
 </head>
 <body>
-    <div class="header">
+    <header class="header">
         <h1>Hello, <span id="logged-username">Username</span></h1>
         <button onclick="logout()" class="LogoutBtn">Logout</button>
+    </header>
+
+    <section id="add-post-container">
+        <article>
+            <h2>Add New Post</h2>
+
+         <div>
+        <textarea
+        name=""
+        id="newPost-text"
+        cols="50"
+        rows="5"
+        placeholder="Add post text"
+        ></textarea>
     </div>
 
-    <SECTION id="post-container">
+    <div>
+        <input type="text" id="newPost-image" placeholder="Add post Image URL"/>
+    </div>
+
+    <div>
+        <button onclick="handleAddNewPost()" class="addPost-btn">POST</button>
+    </div>
+        </article>
+    </section>
+
+   
+
+    <section id="post-container">
 
     <!-- post -->
      <div class="post">
