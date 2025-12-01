@@ -64,6 +64,27 @@ app.get("/getAllPosts", (req, res) => {
   });
 });
 
+//getting comments of a single post
+
+app.get('/getAllComments/:postId', (req,res) => {
+  let id = req.params.postId;
+
+  let sqlForAllComments = `SELECT users.userName As commentedUserName, users.userImage AS connectedUserImage, comments.commentId, comments.commentofPostId, comments.commentText, comments.commentTime
+FROM comments
+INNER JOIN users ON comments.commentedUserId=users.userid WHERE
+comments.commentofPostId = ${id}`;
+
+  let query = db.query(sqlForAllComments, (err, result) => {
+    if (err) {
+      console.log("Error fetching comments from the database: ", err);
+      throw err;
+    }
+    else{
+      res.send(result);
+    }
+})
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
