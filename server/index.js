@@ -85,6 +85,27 @@ comments.commentofPostId = ${id}`;
 })
 });
 
+// adding new comments to a post
+app.post('/postComment' , (req, res) => {
+  const { commentofPostId, commentedUserId, commentText, commentTime} = req.body;
+  
+  let sqlForAddingNewComments = `INSERT INTO comments (commentId, commentofPostId, commentedUserId, commentText, commentTime) VALUES (NULL, ?, ?, ?, ?);`;
+
+  let query = db.query(sqlForAddingNewComments, [
+    commentofPostId,
+    commentedUserId,
+    commentText,
+    commentTime], 
+    (err, result) => {
+    if (err) {
+      console.log("Error adding comment to the database: ", err);
+    }
+    else{
+      res.send(result);
+    }
+  }
+  );
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
