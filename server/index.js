@@ -50,7 +50,7 @@ app.post("/getUserInfo", (req, res) => {
 });
 
 app.get("/getAllPosts", (req, res) => {
-  const sqlForAllPosts = `SELECT users.userName AS postedUserName, users.userImage AS postedUserImage, posts.postedTime, posts.postText, posts.postImageUrl FROM posts INNER JOIN users ON posts.postedUserId=users.userid ORDER BY posts.postedTime DESC`;
+  const sqlForAllPosts = `SELECT users.userName AS postedUserName, users.userImage AS postedUserImage, posts.postId, posts.postedTime, posts.postText, posts.postImageUrl FROM posts INNER JOIN users ON posts.postedUserId=users.userid ORDER BY posts.postedTime DESC`;
 
   let query = db.query(sqlForAllPosts, (err, result) => {
     if (err) {
